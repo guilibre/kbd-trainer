@@ -1,6 +1,8 @@
 #pragma once
 
-typedef enum {
+#include <cstdint>
+
+enum GameDirection : uint8_t {
     NEUTRAL = 0,
     UP,
     UP_FORWARD,
@@ -12,14 +14,14 @@ typedef enum {
     UP_BACK,
     UNKNOWN,
     DISCONNECTED
-} GameDirection;
+};
 
-typedef struct {
+struct ControllerState {
     GameDirection direction;
     bool select_pressed;
     bool back_pressed;
-} ControllerState;
+};
 
-bool InitController();
-ControllerState *PollController();
-void _parseDirection();
+auto InitController() -> bool;
+auto PollController() -> ControllerState *;
+void parseDirection();
